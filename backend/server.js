@@ -19,6 +19,10 @@ app.use(cookieParser());
 
 app.use("/api/donate", donateRouter);
 
+app.get("/", (req, res) => {
+  res.send("Backend ");
+});
+
 process.on("unhandledRejection", (err, promise) => {
   console.error(`Unhandled rejection: ${err.message}`);
   server.close(() => process.exit(1));
