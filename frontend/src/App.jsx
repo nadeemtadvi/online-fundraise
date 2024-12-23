@@ -1,6 +1,7 @@
 import './App.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import Landing from './Components/Landing';
 
 function App() {
   const [responseId, setResponseId] = useState("");
@@ -150,6 +151,7 @@ function App() {
         <p>Loading...</p>
       )}
       </div>
+      <Landing/>
     </div>
   );
 }
