@@ -27,7 +27,7 @@ function App() {
     };
 
     try {
-      const response = await axios.post("http://localhost:8000/api/donate/create", donationData);
+      const response = await axios.post("https://online-fundraise.onrender.com/api/donate/create", donationData);
       handleRazorpayScreen(response.data);
     } catch (error) {
       console.error("Error creating donation order:", error);
@@ -72,7 +72,7 @@ function App() {
       console.log("Fetching payment status for:", responseId);
       const fetchPaymentStatus = async () => {
         try {
-          const response = await axios.get(`http://localhost:8000/api/donate/getdonation/${responseId}`);
+          const response = await axios.get(`https://online-fundraise.onrender.com/api/donate/getdonation/${responseId}`);
           setResponseState(response.data);
         } catch (error) {
           console.error("Error fetching payment status:", error);
