@@ -2,6 +2,7 @@ import './App.css';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Landing from './Components/Landing';
+import Dashboard from './Components/Dashboard/Dashboard';
 
 function App() {
   const [responseId, setResponseId] = useState("");
@@ -87,7 +88,8 @@ function App() {
   }, [responseId]);
 
   return (
-    <div className="App flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
+    <div>
+    <div className="max-w-screen-xl mx-auto flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       <div className="bg-white p-6 rounded-lg shadow-lg w-full max-w-md">
         <h1 className="text-3xl font-semibold text-center text-indigo-600 mb-6">Donate to the Cause</h1>
 
@@ -151,7 +153,10 @@ function App() {
         <p>Loading...</p>
       )}
       </div>
-      <Landing/>
+    
+    </div>
+    <Landing/>
+    <Dashboard/>
     </div>
   );
 }

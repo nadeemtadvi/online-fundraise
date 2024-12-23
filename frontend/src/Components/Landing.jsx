@@ -95,7 +95,7 @@ const data = {
 
 const Landing = () => {
   return (
-    <div>
+    <div className="max-w-screen-xl mx-auto">
       <Header />
       <Carousel/>
       <AboutUs about={data.about}  />
