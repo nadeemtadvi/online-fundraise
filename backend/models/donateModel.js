@@ -1,13 +1,39 @@
 import mongoose from "mongoose";
 
-const donationSchema = new mongoose.Schema({
-	name: String,
-	email: String,
-	amount: Number,
-	paymentId: String,
-	status: { type: String, default: 'Pending' },
-	date: { type: Date, default: Date.now },
-});
-const donate = mongoose.model("donateBank", donationSchema);
+const donationSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: true,
+    },
+    amount: {
+      type: Number,
+      required: true,
+    },
+    mobile: {
+      type: String,
+      required: true,
+    },
+    paymentId: {
+      type: String,
+      unique: true,
+      sparse: true,
+    },
+    orderId: {
+      type: String,
+      unique: true,
+    },
+    status: {
+      type: String,
+      required: true,
+    },
+    method: {
+      type: String,
+    },
+  },
+  { timestamps: true }
+);
 
-export default donate;
+const Donation = mongoose.model("Donation", donationSchema);
+
+export default Donation;

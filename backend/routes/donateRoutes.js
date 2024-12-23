@@ -1,15 +1,11 @@
-import express from 'express';
-import { donatehook, donateCreate } from '../controllers/donateController.js';
-
+import express from "express";
+import { getDonation, donateCreate } from "../controllers/donateController.js";
 
 const donateRouter = express.Router();
 
-donateRouter.use(
-  express.urlencoded({
-    extended: false,
-  })
-);
+donateRouter.use(express.urlencoded({ extended: false }));
 
-donateRouter.route('/donate/:id').post(donateCreate).get(donatehook);
+donateRouter.post("/create", donateCreate);
+donateRouter.get("/getdonation/:paymentId", getDonation);
 
 export default donateRouter;
