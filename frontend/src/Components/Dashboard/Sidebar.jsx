@@ -1,48 +1,47 @@
-import React from 'react'
-
-const Sidebar = () => {
+import React from "react";
+import { FaRegUser } from "react-icons/fa6";
+import { CiCircleQuestion } from "react-icons/ci";
+import { LiaWalletSolid } from "react-icons/lia";
+import { IoHomeOutline } from "react-icons/io5";
+const Sidebar = ({issideOpen, sideOpen}) => {
+  const multiItems = [
+    {
+      icon: <FaRegUser className="mr-2 text-[13px] w-[20px]" />,
+      text: "Profile",
+    },
+    {
+      icon: <LiaWalletSolid className="mr-2 text-[18px] w-[20px]" />,
+      text: "Transaction",
+    },
+    {
+      icon: <CiCircleQuestion className="mr-2 text-[20px] w-[20px]" />,
+      text: "Help Center",
+    },
+  ];
   return (
-    <nav className="w-64 bg-gray-100 p-4 flex-shrink-0">
-    <ul className="space-y-2">
-      <li>
-        <a className="flex items-center p-2 rounded bg-blue-600 text-white" href="index.html">
-          <i className="bi-house-fill mr-3"></i> Overview
+    <nav className="w-64 bg-gray-100 py-4 flex-shrink-0">
+      <div className="mb-4">
+        <a
+          className="flex items-center p-2 rounded bg-blue-600 text-white"
+          href="index.html"
+        >
+          <IoHomeOutline className="mr-2 text-[18px] w-[20px]" /> Overview
         </a>
-      </li>
-      <li>
-        <a className="flex items-center p-2 rounded hover:bg-gray-200" href="wallet.html">
-          <i className="bi-wallet mr-3"></i> My Wallet
-        </a>
-      </li>
-      <li>
-        <a className="flex items-center p-2 rounded hover:bg-gray-200" href="profile.html">
-          <i className="bi-person mr-3"></i> Profile
-        </a>
-      </li>
-      <li>
-        <a className="flex items-center p-2 rounded hover:bg-gray-200" href="setting.html">
-          <i className="bi-gear mr-3"></i> Settings
-        </a>
-      </li>
-      <li>
-        <a className="flex items-center p-2 rounded hover:bg-gray-200" href="help-center.html">
-          <i className="bi-question-circle mr-3"></i> Help Center
-        </a>
-      </li>
-      <li className="mt-8">
-        <img src="images/credit-card.png" className="w-full mb-2" alt="Upgrade" />
-        <a className="btn btn-primary w-full" href="#">
-          Upgrade
-        </a>
-      </li>
-      <li className="mt-auto">
-        <a className="flex items-center p-2 rounded hover:bg-gray-200" href="#">
-          <i className="bi-box-arrow-left mr-3"></i> Logout
-        </a>
-      </li>
-    </ul>
-  </nav>
-  )
-}
+      </div>
+      <ul className="space-y-2">
+        {multiItems.map((item, index) => (
+          <li
+          onClick={() => issideOpen(item.text)}
+            key={index}
+            className={`flex items-center cursor-pointer p-2 rounded ${sideOpen === item.text ? 'bg-gray-400 text-white':''} `}
+          >
+            {item.icon}
+            {item.text}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
 
-export default Sidebar
+export default Sidebar;

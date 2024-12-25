@@ -1,33 +1,58 @@
-import React from 'react'
-
+import React from "react";
+import { IoMdMail } from "react-icons/io";
+import { FaGithub } from "react-icons/fa";
+import { FaLinkedinIn } from "react-icons/fa";
+import { IoLogoWhatsapp } from "react-icons/io";
+import { FaInstagram } from "react-icons/fa";
+import { FaFacebookF } from "react-icons/fa";
 const SocialDropdown = () => {
-    
-const socialLinks = [
-    { name: "Google", img: "images/social/search.png" },
-    { name: "Spotify", img: "images/social/spotify.png" },
-    { name: "Telegram", img: "images/social/telegram.png" },
-    { name: "Snapchat", img: "images/social/snapchat.png" },
-    { name: "Tiktok", img: "images/social/tiktok.png" },
-    { name: "Youtube", img: "images/social/youtube.png" }
+  const socialLinks = [
+    {
+      name: "nadeem@gmail.com",
+      img:<IoMdMail className="text-gray-400 text-[1.9rem]"/>,
+    },
+    {
+      name: "Github",
+      img:<FaGithub className="text-gray-400 text-[1.9rem]"/>,
+    },
+    {
+      name: "LinkedIn",
+      img:<FaLinkedinIn className="text-gray-400 text-[1.9rem]"/>,
+    },
+    {
+      name: "Instagram",
+      img:<FaInstagram className="text-gray-400 text-[1.9rem]"/>,
+    },
+    {
+      name: "Whatsapp",
+      img:<IoLogoWhatsapp className="text-gray-400 text-[1.9rem]"/>,
+    },
+   
+    {
+      name: "Facebook",
+      img:<FaFacebookF className="text-gray-400 text-[1.9rem]"/>,
+    },
+   
   ];
-  
+
   return (
-    <div className="relative">
-    <a className="cursor-pointer" role="button">
-      <i className="bi-three-dots-vertical"></i>
-    </a>
-    <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg p-2">
-      <div className="grid grid-cols-3 gap-2">
-        {socialLinks.map((link, index) => (
-          <a key={index} className="text-center" href="#">
-            <img src={link.img} className="w-8 h-8 mx-auto" alt={link.name} />
-            <span className="text-xs">{link.name}</span>
-          </a>
-        ))}
+    <div className="grow relative px-6 py-4 mb-24">
+      <div className="mb-4">
+        <h1 className="text-2xl font-bold">Contact</h1>
+        <small className="text-gray-500">Hello Thomas, welcome back!</small>
+      </div>
+      <div className="  mt-2 w-full bg-white shadow-lg rounded-lg p-2">
+        <div className="grid grid-cols-3 gap-2 w-full">
+          {socialLinks.map((link, index) => (
+            <a key={index} className="p-10 text-center "  href="#">
+              <span className="inline-flex  w-16 h-16 mb-3 bg-gray-100 rounded-full  items-center justify-center">{link.img}</span> 
+              <span className="block text-md">{link.name}</span>
+            </a>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
-  )
-}
+  );
+};
 
-export default SocialDropdown
+export default SocialDropdown;
