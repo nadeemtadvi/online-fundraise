@@ -1,108 +1,73 @@
 import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { Navigation, Pagination, Mousewheel, Keyboard } from "swiper/modules";
 
-const Carousel = () => {
-    const carouselData = [
-        {
-          img: "assets/images/slider/home-slider-1.jpg",
-          title: "Because they need your help",
-          subtitle: "Do not let them down",
-          buttonText: "DONATE NOW",
-          buttonLink: "#",
-          isActive: true
-        },
-        {
-          img: "assets/images/slider/home-slider-2.jpg",
-          title: "Together we can improve their lives",
-          subtitle: "So let's do it!",
-          buttonText: "DONATE NOW",
-          buttonLink: "#",
-          isActive: false
-        },
-        {
-          img: "assets/images/slider/home-slider-3.jpg",
-          title: "A penny is a lot of money, if you have not got a penny.",
-          subtitle: "You can make the difference!",
-          buttonText: "DONATE NOW",
-          buttonLink: "#",
-          isActive: false
-        }
-      ];
+const Carousel = ({handleOpen}) => {
+  const carouselData = [
+    {
+      img: "https://images.unsplash.com/flagged/photo-1574097656146-0b43b7660cb6?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Because they need your help",
+      subtitle: "Do not let them down",
+      buttonText: "DONATE NOW",
+      buttonLink: "#",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "Together we can improve their lives",
+      subtitle: "So let's do it!",
+      buttonText: "DONATE NOW",
+      buttonLink: "#",
+    },
+    {
+      img: "https://images.unsplash.com/photo-1502781252888-9143ba7f074e?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      title: "A penny is a lot of money, if you have not got a penny.",
+      subtitle: "You can make the difference!",
+      buttonText: "DONATE NOW",
+      buttonLink: "#",
+    },
+  ];
+
   return (
-    <div
-      id="homeCarousel"
-      className="carousel slide carousel-home relative"
-      data-ride="carousel"
-    >
-      <ol className="carousel-indicators absolute bottom-0 left-1/2 transform -translate-x-1/2 flex space-x-3">
+    <div className="carousel-container">
+      <Swiper
+        cssMode={true}
+        navigation={true}
+        pagination={{ clickable: true }}
+        mousewheel={true}
+        keyboard={true}
+        modules={[Navigation, Pagination, Mousewheel, Keyboard]}
+        className="mySwiper"
+      >
         {carouselData.map((item, index) => (
-          <li
-            key={index}
-            data-target="#homeCarousel"
-            data-slide-to={index}
-            className={`w-3 h-3 rounded-full ${
-              item.isActive ? "bg-blue-500" : "bg-gray-300"
-            }`}
-          ></li>
-        ))}
-      </ol>
-
-      <div className="carousel-inner relative w-full overflow-hidden">
-        {carouselData.map((item, index) => (
-          <div
-            key={index}
-            className={`carousel-item ${
-              item.isActive ? "active" : ""
-            } relative float-left w-full`}
-          >
-            <img
-              src={item.img}
-              alt=""
-              className="block w-full h-96 object-cover"
-            />
-            <div className="container mx-auto">
-              <div className="carousel-caption absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center">
-                <h2 className="carousel-title text-3xl font-bold text-white mb-2 animate__animated animate__bounceInDown">
+          <SwiperSlide key={index}>
+            <div className="relative w-full h-[90vh]">
+              <img
+                src={item.img}
+                alt={item.title}
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-50">
+                <h2 className="text-3xl font-bold text-white mb-2 animate__animated animate__bounceInDown">
                   {item.title}
                 </h2>
-                <h4 className="carousel-subtitle text-xl text-white mb-4 animate__animated animate__bounceInUp">
+                <h4 className="text-xl text-white mb-4 animate__animated animate__bounceInUp">
                   {item.subtitle}
                 </h4>
                 <a
+                onClick={() => handleOpen()}
                   href={item.buttonLink}
-                  className="btn btn-lg bg-blue-500 text-white py-2 px-4 rounded hidden md:inline-block animate__animated animate__bounceInUp"
+                  className="btn bg-blue-600 text-white py-2 px-4 rounded animate__animated animate__bounceInUp"
                 >
                   {item.buttonText}
                 </a>
               </div>
             </div>
-          </div>
+          </SwiperSlide>
         ))}
-      </div>
-
-      <a
-        className="left carousel-control absolute top-1/2 transform -translate-y-1/2 left-4"
-        href="#homeCarousel"
-        role="button"
-        data-slide="prev"
-      >
-        <span
-          className="fa fa-angle-left text-3xl text-white"
-          aria-hidden="true"
-        ></span>
-        <span className="sr-only">Previous</span>
-      </a>
-      <a
-        className="right carousel-control absolute top-1/2 transform -translate-y-1/2 right-4"
-        href="#homeCarousel"
-        role="button"
-        data-slide="next"
-      >
-        <span
-          className="fa fa-angle-right text-3xl text-white"
-          aria-hidden="true"
-        ></span>
-        <span className="sr-only">Next</span>
-      </a>
+      </Swiper>
     </div>
   );
 };

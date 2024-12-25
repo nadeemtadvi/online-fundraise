@@ -1,6 +1,6 @@
 import React from 'react'
 
-const DonateModal = () => {
+const Thankyou = () => {
   return (
     <div className="modal fade" id="donateModal" tabIndex="-1" role="dialog" aria-labelledby="donateModalLabel" aria-hidden="true">
     <div className="modal-dialog">
@@ -40,7 +40,7 @@ const DonateModal = () => {
               <textarea cols="30" rows="4" className="form-control w-full px-3 py-2 rounded-md text-gray-800" name="note" placeholder="Additional note"></textarea>
             </div>
             <div className="form-group">
-              <button type="submit" className="btn btn-primary bg-blue-500 text-white py-2 px-4 rounded-md w-full">Donate Now</button>
+              <button type="submit" className="btn btn-primary bg-blue-600 text-white py-2 px-4 rounded-md w-full">Donate Now</button>
             </div>
           </form>
         </div>
@@ -50,4 +50,4 @@ const DonateModal = () => {
   )
 }
 
-export default DonateModal
+export default Thankyou

@@ -1,0 +1,6 @@
+.parent-box .child-box {
+  display: none;
+}
+.parent-box:hover .child-box {
+  display: block;
+}

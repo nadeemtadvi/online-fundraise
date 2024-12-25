@@ -67,7 +67,7 @@ const MainContent = () => {
       ];
       
   return (
-    <main className="flex-grow p-6 bg-gray-50">
+    <main className="flex-grow p-6">
       <div className="mb-6">
         <h1 className="text-2xl font-bold">Overview</h1>
         <small className="text-gray-500">Hello Thomas, welcome back!</small>

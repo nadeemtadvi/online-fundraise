@@ -1,48 +1,31 @@
 import React from "react";
 
-const Header = () => {
+const Header = ({setTab, tab}) => {
   return (
     <header className="bg-blue-600 text-white p-3">
-      <nav className="container mx-auto flex justify-between items-center">
-        <a href="index.html" className="text-xl font-bold">
-          SADAKA
-        </a>
-        <ul className="flex space-x-4">
-          {["HOME", "ABOUT", "CAUSES", "GALLERY", "CONTACT"].map(
-            (item, index) => (
-              <li key={index} className="relative group">
-                <a
-                  className="hover:underline"
-                  href={item.toLowerCase() + ".html"}
-                >
-                  {item}
-                </a>
-                {item === "CAUSES" && (
-                  <ul className="absolute hidden group-hover:block bg-blue-600 text-white mt-2 space-y-2">
-                    <li>
-                      <a
-                        href="causes.html"
-                        className="block px-4 py-2 hover:bg-blue-500"
-                      >
-                        Causes list
-                      </a>
-                    </li>
-                    <li>
-                      <a
-                        href="causes-single.html"
-                        className="block px-4 py-2 hover:bg-blue-500"
-                      >
-                        Single cause
-                      </a>
-                    </li>
-                  </ul>
-                )}
-              </li>
-            )
-          )}
-        </ul>
-      </nav>
-    </header>
+    <nav className="container mx-auto flex flex-wrap justify-between items-center">
+      <a href="index.html" className="text-xl font-bold">
+      RiseFunding
+      </a>
+      <ul className="mt-4 md:mt-0 flex space-x-4 md:space-x-14">
+        {["HOME","DASHBOARD", "CONTACT"].map(
+          (item, index) => (
+            <li key={index} onClick={() => setTab(item)}  className={`cursor-pointer relative group ${
+              tab === item ? "font-bold underline" : ""
+            }`}>
+              <a
+               
+                href="#"
+              >
+                {item}
+              </a>
+             
+            </li>
+          )
+        )}
+      </ul>
+    </nav>
+  </header>
   );
 };
 
