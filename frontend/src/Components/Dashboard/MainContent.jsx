@@ -6,27 +6,27 @@ const MainContent = () => {
 
       const transactions = [
         {
-          img: "images/profile/senior-man-white-sweater-eyeglasses.jpg",
-          name: "Daniel Jones",
-          type: "C2C Transfer",
+          img: avatar,
+          name: "Thomas",
+          type: "Bk Transfer",
           date: "05/12/2023",
-          amount: "-$250",
+          amount: "-250",
           amountType: "text-danger"
         },
         {
-          img: "images/profile/young-beautiful-woman-pink-warm-sweater.jpg",
-          name: "Public Bank",
-          type: "Mobile Reload",
+          img: avatar,
+          name: "Thomas",
+          type: "UPI",
           date: "22/8/2023",
-          amount: "+$280",
+          amount: "+280",
           amountType: "text-success"
         },
         {
-          img: "images/profile/young-woman-with-round-glasses-yellow-sweater.jpg",
-          name: "Store",
-          type: "Payment Received",
+          img: avatar,
+          name: "Thomas",
+          type: "Card",
           date: "22/8/2023",
-          amount: "+$280",
+          amount: "+280",
           amountType: "text-success"
         }
       ];
@@ -43,7 +43,7 @@ const MainContent = () => {
               <span>****</span>
               <span>****</span>
               <span>****</span>
-              <p>2560</p>
+              <p>2025</p>
             </div>
             <div className="flex justify-between mt-4">
               <div>
@@ -51,7 +51,6 @@ const MainContent = () => {
                 <p>12/2028</p>
               </div>
               <div>
-                <small>Card Holder</small>
                 <p>Thomas</p>
               </div>
             </div>
@@ -93,25 +92,25 @@ const MainContent = () => {
               <div key={index} className="flex items-center mb-4">
                 <img
                   src={transaction.img}
-                  className="w-12 h-12 rounded-full"
+                  className="w-8 h-8"
                   alt={transaction.name}
                 />
                 <div className="ml-3">
                   <p>
-                    <a href="transaction-detail.html">{transaction.name}</a>
+                    <a href="#">{transaction.name}</a>
                   </p>
                   <small className="text-gray-500">{transaction.type}</small>
                 </div>
                 <div className="ml-auto text-right">
                   <small>{transaction.date}</small>
-                  <strong className={`d-block ${transaction.amountType}`}>
-                    {transaction.amount}
+                  <strong className={`d-block ml-1 ${transaction.amountType}`}>
+                    {transaction.amount} Rs
                   </strong>
                 </div>
               </div>
             ))}
             <div className="border-t pt-4 text-center">
-              <a href="wallet.html" className="btn btn-primary">
+              <a href="#" className="btn btn-primary hover:text-blue-600">
                 View all transactions{" "}
                 <i className="bi-arrow-up-right-circle-fill ml-2"></i>
               </a>

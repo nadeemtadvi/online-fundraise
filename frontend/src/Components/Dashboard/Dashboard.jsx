@@ -10,7 +10,7 @@ import Transaction from "./Transaction";
 const Dashboard = () => {
   const [sideOpen, issideOpen] = useState('Profile')
   return (
-    <div className="max-w-screen-xl mx-auto">
+    <div className="max-w-screen-xl mx-auto mb-20">
       <div className="container mx-auto flex mt-8">
         <Sidebar sideOpen={sideOpen} issideOpen={issideOpen} />
         {sideOpen === 'Profile' && <MainContent />}

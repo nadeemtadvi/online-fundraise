@@ -8,10 +8,10 @@ const Footer = () => {
         <div className="container mx-auto px-4 text-right">
           RiseFunding @ copyrights 2024 - by{" "}
           <a
-            href="http://www.ouarmedia.com"
+            href="#"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-400"
+            className="text-blue-600"
           >
             Nadeem
           </a>

@@ -5,6 +5,7 @@ import Dashboard from "./Components/Dashboard/Dashboard";
 import Footer from "./Components/Footer";
 import { useState } from "react";
 import Donation from "./Components/Donation";
+import SocialDropdown from "./Components/Dashboard/SocialDropdown";
 
 const App = () => {
   const [tab, setTab] = useState("HOME");
@@ -19,7 +20,7 @@ const App = () => {
       {tab === "HOME" && <Landing handleOpen={handleOpen} />}
       {tab === "DASHBOARD" && <Dashboard />}
       {tab === "CONTACT" && (
-        <div className="p-8">Contact Page Coming Soon!</div>
+        <div className="p-8"><SocialDropdown/></div>
       )}
       <Footer />
       {open && <Donation handleOpen={handleOpen} />}

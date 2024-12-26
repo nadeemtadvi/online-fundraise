@@ -1,6 +1,6 @@
 import React from "react";
 
-const OurCauses = ({ causes }) => {
+const OurCauses = ({ causes, handleOpen }) => {
   return (
     <div className="container mx-auto my-12">
       <h2 className="text-center text-4xl font-bold mb-12">Our Causes</h2>
@@ -29,6 +29,7 @@ const OurCauses = ({ causes }) => {
             <div className="">
               <a
                 href="#"
+                onClick={() => handleOpen()}
                 className="bg-blue-600 text-white py-2 px-4  w-full inline-block text-center rounded hover:bg-blue-600 transition"
               >
                 DONATE NOW

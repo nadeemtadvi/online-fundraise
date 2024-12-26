@@ -88,7 +88,7 @@ const Donation = ({handleOpen}) => {
   return (
     <div onClick={() => handleOpen()} className=" fixed z-10 top-0 left-0 w-full h-full bg-[#00000045]">
       <div className="absolute bg-white z-20 left-[50%] -translate-x-2/4 -translate-y-2/4 top-[50%]   p-6 m-3  rounded-lg  w-full max-w-lg">
-        <h1 className="text-3xl font-semibold text-center text-indigo-600 mb-6">Donate</h1>
+        <h1 className="text-3xl font-semibold text-center text-blue-600 mb-6">Donate</h1>
 
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Name:</label>
@@ -96,7 +96,7 @@ const Donation = ({handleOpen}) => {
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your name"
           />
         </div>
@@ -107,7 +107,7 @@ const Donation = ({handleOpen}) => {
             type="text"
             value={mobile}
             onChange={(e) => setMobile(e.target.value)}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter your mobile number"
           />
         </div>
@@ -118,19 +118,19 @@ const Donation = ({handleOpen}) => {
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
-            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="mt-1 p-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
             placeholder="Enter amount"
           />
         </div>
 
         <button
           onClick={createDonationOrder}
-          className="w-full py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 transition duration-300"
+          className="w-full py-2 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 transition duration-300"
         >
           Donate Now
         </button>
 
-        {/* {responseId && <p className="mt-4 text-center text-gray-600">Payment ID: <span className="font-semibold text-indigo-600">{responseId}</span></p>}
+        {/* {responseId && <p className="mt-4 text-center text-gray-600">Payment ID: <span className="font-semibold text-blue-600">{responseId}</span></p>}
         {responseState ? (
         <div className="mt-6">
           <h2 className="text-xl font-semibold text-gray-800">Payment Status:</h2>

@@ -9,7 +9,6 @@ import { HiOutlineBanknotes } from "react-icons/hi2";
 import { FaHandsHelping } from "react-icons/fa";
 import { FaPuzzlePiece } from "react-icons/fa";
 import img1 from '../assets/650.jpg';
-import img2 from '../assets/christmas_2012_new_5129.jpg';
 import img3 from '../assets/OE60X50.jpg';
 import img4 from '../assets/zas3.jpg';
 
@@ -89,7 +88,7 @@ const data = {
   ],
   sponsors: [
     img1,
-    img2,
+    img4,
     img3,
     img4,
    ],
@@ -101,7 +100,7 @@ const Landing = ({handleOpen}) => {
       <Carousel handleOpen={handleOpen}/>
       <AboutUs about={data.about}  />
       <HomeReasons reasons={data.reasons} />
-      <OurCauses causes={data.causes} />
+      <OurCauses causes={data.causes} handleOpen={handleOpen} />
       <OurSponsors sponsors={data.sponsors} />
     </div>
   );
