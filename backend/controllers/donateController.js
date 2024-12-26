@@ -1,5 +1,7 @@
 import Razorpay from "razorpay";
 import Donation from "../models/donateModel.js";
+import mongoose from "mongoose";
+
 
 const donateCreate = async (req, res) => {
   const razorpay = new Razorpay({
@@ -10,8 +12,8 @@ const donateCreate = async (req, res) => {
   const options = {
     amount: req.body.amount * 100,
     currency: "INR",
-    receipt: `receipt_${Date.now()}`, 
-    payment_capture: 1, 
+    receipt: `receipt_${Date.now()}`,
+    payment_capture: 1,
   };
 
   try {
@@ -36,7 +38,7 @@ const donateCreate = async (req, res) => {
         name: req.body.name,
         amount: req.body.amount,
         mobile: req.body.mobile,
-        paymentId: null, 
+        paymentId: null,
         orderId: order.id,
         status: "created",
       });
@@ -54,37 +56,24 @@ const donateCreate = async (req, res) => {
   }
 };
 
-
 const getDonation = async (req, res) => {
-  const { paymentId } = req.params;
-
-  const razorpay = new Razorpay({
-    key_id: process.env.KEY_ID,
-    key_secret: process.env.KEY_SECRET,
-  });
+  const { id } = req.params;
 
   try {
-    const payment = await razorpay.payments.fetch(paymentId);
-
-    if (!payment) {
-      return res.status(404).json({ error: "Payment not found" });
+    console.log("Type of ID:", typeof id);
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({ error: "Invalid ID format" });
     }
+    const donation = await Donation.findById(id);
 
-    const donation = await Donation.findOneAndUpdate(
-      { orderId: payment.order_id },
-      {
-        paymentId: payment.id,
-        status: payment.status,
-        method: payment.method,
-      },
-      { new: true }
-    );
-
+    console.log("Received paymentId: ", donation);
     if (!donation) {
-      return res.status(404).json({ error: "Donation not found in the database" });
+      return res
+        .status(404)
+        .json({ error: "Donation not found in the database" });
     }
 
-    res.json({
+    res.status(200).json({
       name: donation.name,
       mobile: donation.mobile,
       amount: donation.amount / 100,
@@ -94,14 +83,11 @@ const getDonation = async (req, res) => {
       orderId: donation.orderId,
     });
   } catch (error) {
-    console.error("Error fetching payment details:", error);
-    console.error("Full error:", error);
+    console.error("Error fetching donation details:", error);
 
-    if (error.name === "RazorpayError") {
-      return res.status(500).json({ error: "Razorpay API error: Unable to fetch payment details" });
-    }
-
-    res.status(500).json({ error: "Internal Server Error: Unable to fetch payment details" });
+    res.status(500).json({
+      error: "Internal Server Error: Unable to fetch donation details",
+    });
   }
 };
 
