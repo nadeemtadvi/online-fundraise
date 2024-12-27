@@ -6,6 +6,6 @@ const donateRouter = express.Router();
 donateRouter.use(express.urlencoded({ extended: false }));
 
 donateRouter.post("/create", donateCreate);
-donateRouter.get("/getdonation/:id", getDonation);
+donateRouter.get("/getdonation", getDonation);
 
 export default donateRouter;

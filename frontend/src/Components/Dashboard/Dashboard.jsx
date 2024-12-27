@@ -3,49 +3,56 @@ import "tailwindcss/tailwind.css";
 import Sidebar from "./Sidebar";
 import MainContent from "./MainContent";
 import SocialDropdown from "./SocialDropdown";
+import axios from "axios";
 import Transaction from "./Transaction";
 
 const Dashboard = () => {
   const [sideOpen, issideOpen] = useState("Profile");
-  const [response, setResponse] = useState("");
-  const getIdFromUrl = () => {
-    const queryParams = new URLSearchParams(window.location.search);
-    return queryParams.get("id");
-  };
+  const [response, setResponse] = useState('');
+  const [loading, setLoading] = useState(true);
 
-  const id = getIdFromUrl();
+  console.log("donation", response);
 
   useEffect(() => {
-    console.log("Fetching payment status for:", id);
     const fetchPaymentStatus = async () => {
       try {
         const res = await axios.get(
-          // `https://online-fundraise.onrender.com/api/donate/getdonation/${id}`
-          `http://localhost:8000/api/donate/getdonation/${id}`
+          `http://localhost:8000/api/donate/getdonation`
         );
         setResponse(res.data);
+        console.log("res.data", res.data);
       } catch (error) {
         console.error("Error fetching payment status:", error);
+      } finally {
+        setLoading(false);
       }
     };
-    if (id) {
-      fetchPaymentStatus();
-    } else {
-      console.log("No payment ID available for fetching status");
-    }
-  }, [id]);
+
+    fetchPaymentStatus();
+  }, []);
 
   return (
     <div className="max-w-screen-xl mx-auto mb-20">
-      <div className="container mx-auto flex mt-8">
+      <div className="container mx-auto flex pt-8">
         <Sidebar sideOpen={sideOpen} issideOpen={issideOpen} />
-        {sideOpen === "Profile" && <MainContent />}
+        {sideOpen === "Profile" && <MainContent response={response} issideOpen={issideOpen} />}
         {sideOpen === "Transaction" && (
           <div className="px-6 w-full mb-20">
-            <Transaction />
+            <div className="p-4 bg-white rounded-lg shadow mt-4 w-full">
+              <h5 className="mb-4 text-xl font-bold">Contribution</h5>
+              {loading ? (
+                <p className="text-center text-gray-600">Loading donations...</p>
+              ) : (
+                <>
+                
+                  <Transaction response={response} />
+                </>
+              )}
+            </div>
           </div>
         )}
         {sideOpen === "Help Center" && <SocialDropdown />}
+     
       </div>
     </div>
   );

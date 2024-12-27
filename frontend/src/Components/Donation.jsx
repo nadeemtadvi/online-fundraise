@@ -1,9 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
-import { useState } from "react";
 
 const Donation = ({ handleOpen }) => {
-  const [responseState, setResponseState] = useState([]);
   const [amount, setAmount] = useState(0);
   const [name, setName] = useState("");
   const [mobile, setMobile] = useState("");
@@ -30,7 +28,8 @@ const Donation = ({ handleOpen }) => {
         "https://online-fundraise.onrender.com/api/donate/create",
         donationData
       );
-      handleRazorpayScreen(response.data);
+      const donationId = response.data._id;
+      handleRazorpayScreen(response.data, donationId);
     } catch (error) {
       console.error("Error creating donation order:", error);
     }
@@ -42,7 +41,7 @@ const Donation = ({ handleOpen }) => {
     );
 
     if (!res) {
-      alert("Some error at Razorpay screen loading");
+      alert("Some error occurred while loading Razorpay screen");
       return;
     }
 
@@ -71,21 +70,23 @@ const Donation = ({ handleOpen }) => {
     paymentObject.open();
   };
 
-  
   return (
-    <div
-      onClick={() => handleOpen()}
-      className=" fixed z-10 top-0 left-0 w-full h-full bg-[#00000045]"
-    >
-      <div className="absolute bg-white z-20 left-[50%] -translate-x-2/4 -translate-y-2/4 top-[50%]   p-6 m-3  rounded-lg  w-full max-w-lg">
-        <h1 className="text-3xl font-semibold text-center text-blue-600 mb-6">
-          Donate
-        </h1>
+    <div className="fixed z-10 top-0 left-0 w-full h-full bg-[#00000045]">
+      <div className="absolute bg-white z-20 left-[50%] -translate-x-2/4 -translate-y-2/4 top-[50%] p-6 m-3 rounded-lg w-full max-w-lg">
+        <div className="flex justify-between">
+          <h1 className="text-3xl font-semibold text-center text-blue-600 mb-6">
+            Donate
+          </h1>
+          <span
+            onClick={() => handleOpen()}
+            className="text-2xl text-violet-800"
+          >
+            CLOSE
+          </span>
+        </div>
 
         <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Name:
-          </label>
+          <label className="block text-sm font-medium text-gray-700">Name:</label>
           <input
             type="text"
             value={name}
@@ -127,26 +128,6 @@ const Donation = ({ handleOpen }) => {
         >
           Donate Now
         </button>
-
-        {responseId && <p className="mt-4 text-center text-gray-600">Payment ID: <span className="font-semibold text-blue-600">{responseId}</span></p>}
-        {responseState ? (
-        <div className="mt-6">
-          <h2 className="text-xl font-semibold text-gray-800">Payment Status:</h2>
-          <ul className="mt-3  text-gray-700 grid grid-cols-2">
-            <li className='py-1.5'>Name:</li>
-            <li className='py-1.5 font-semibold capitalize'>{responseState.name}</li>
-            <li className='py-1.5'>Amount:</li>
-            <li className='py-1.5 font-semibold'> {responseState.amount ? `${responseState.amount} Rs.` : ''}</li>
-            <li className='py-1.5'>Payment Method:</li>
-            <li className='py-1.5 font-semibold uppercase'> {responseState.method}</li>
-            <li className='py-1.5'>Order ID:</li>
-            <li className='py-1.5 font-semibold'> {responseState.orderId}</li>
-            <li className='py-1.5'>Status:</li>
-            <li className='py-1.5 font-semibold'> {responseState.status}</li>
-          </ul>
-        </div>) : (
-        <p>Loading...</p>
-      )}
       </div>
     </div>
   );

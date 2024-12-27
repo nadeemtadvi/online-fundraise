@@ -57,31 +57,24 @@ const donateCreate = async (req, res) => {
 };
 
 const getDonation = async (req, res) => {
-  const { id } = req.params;
-
   try {
-    console.log("Type of ID:", typeof id);
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ error: "Invalid ID format" });
-    }
-    const donation = await Donation.findById(id);
+    const donations = await Donation.find();
 
-    console.log("Received paymentId: ", donation);
-    if (!donation) {
-      return res
-        .status(404)
-        .json({ error: "Donation not found in the database" });
+    if (!donations || donations.length === 0) {
+      return res.status(404).json({ error: "No donations found in the database" });
     }
 
-    res.status(200).json({
+    const formattedDonations = donations.map(donation => ({
       name: donation.name,
       mobile: donation.mobile,
-      amount: donation.amount / 100,
+      amount: donation.amount / 100,  
       status: donation.status,
       method: donation.method,
       paymentId: donation.paymentId,
       orderId: donation.orderId,
-    });
+    }));
+
+    res.status(200).json(formattedDonations);
   } catch (error) {
     console.error("Error fetching donation details:", error);
 
@@ -90,5 +83,6 @@ const getDonation = async (req, res) => {
     });
   }
 };
+
 
 export { donateCreate, getDonation };

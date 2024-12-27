@@ -1,30 +1,24 @@
 import "./App.css";
-import Landing from "./Components/Landing";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import HomePage from "./Pages/HomePage";
+import DashboardPage from "./Pages/DashboardPage";
 import Header from "./Components/Header";
-import Dashboard from "./Components/Dashboard/Dashboard";
 import Footer from "./Components/Footer";
-import { useState } from "react";
-import Donation from "./Components/Donation";
 import SocialDropdown from "./Components/Dashboard/SocialDropdown";
 
 const App = () => {
-  const [tab, setTab] = useState("HOME");
-  const [open, setOpen] = useState(false);
-  const handleOpen = () => {
-    setOpen((prev) => !prev);
-  };
-
   return (
-    <div className="bg-gray-100">
-      <Header tab={tab} setTab={setTab} />
-      {tab === "HOME" && <Landing handleOpen={handleOpen} />}
-      {tab === "DASHBOARD" && <Dashboard />}
-      {tab === "CONTACT" && (
-        <div className="p-8"><SocialDropdown/></div>
-      )}
-      <Footer />
-      {open && <Donation handleOpen={handleOpen} />}
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/dashboard/" element={<DashboardPage />} />
+          <Route path="/contact" element={<SocialDropdown />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 };
 
