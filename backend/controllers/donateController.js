@@ -1,6 +1,5 @@
 import Razorpay from "razorpay";
 import Donation from "../models/donateModel.js";
-import mongoose from "mongoose";
 
 
 const donateCreate = async (req, res) => {
@@ -10,52 +9,36 @@ const donateCreate = async (req, res) => {
   });
 
   const options = {
-    amount: req.body.amount * 100,
+    amount: req.body.amount * 100, // Razorpay requires amount in paise
     currency: "INR",
     receipt: `receipt_${Date.now()}`,
-    payment_capture: 1,
+    payment_capture: 1, // Auto capture after payment
   };
 
   try {
     const order = await razorpay.orders.create(options);
 
-    let existingDonation = await Donation.findOne({ paymentId: null });
+    // Create a new donation record
+    const newDonation = new Donation({
+      name: req.body.name,
+      amount: req.body.amount,
+      mobile: req.body.mobile,
+      paymentId: null, // This will be updated after successful payment
+      orderId: order.id,
+      status: "created", // Initial status
+    });
 
-    if (existingDonation) {
-      existingDonation.orderId = order.id;
-      existingDonation.amount = req.body.amount;
-      existingDonation.name = req.body.name;
-      existingDonation.mobile = req.body.mobile;
-      existingDonation.status = "created";
+    await newDonation.save();
 
-      await existingDonation.save();
-      res.json({
-        order_id: order.id,
-        amount: order.amount,
-      });
-    } else {
-      const newDonation = new Donation({
-        name: req.body.name,
-        amount: req.body.amount,
-        mobile: req.body.mobile,
-        paymentId: null,
-        orderId: order.id,
-        status: "created",
-      });
-
-      await newDonation.save();
-
-      res.json({
-        order_id: order.id,
-        amount: order.amount,
-      });
-    }
+    res.json({
+      order_id: order.id,
+      amount: order.amount,
+    });
   } catch (error) {
     console.error("Order creation error:", error);
     res.status(500).send("Internal Server Error: Unable to create order");
   }
 };
-
 const getDonation = async (req, res) => {
   try {
     const donations = await Donation.find();

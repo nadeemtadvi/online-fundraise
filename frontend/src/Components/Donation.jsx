@@ -25,15 +25,14 @@ const Donation = ({ handleOpen }) => {
 
     try {
       const response = await axios.post(
-        "https://online-fundraise.onrender.com/api/donate/create",
+        "http://localhost:8000/api/donate/create",
         donationData
       );
-      const donationId = response.data._id;
-      handleRazorpayScreen(response.data, donationId);
+      handleRazorpayScreen(response.data);
     } catch (error) {
       console.error("Error creating donation order:", error);
     }
-  };
+  }; 
 
   const handleRazorpayScreen = async (orderData) => {
     const res = await loadScript(
@@ -53,7 +52,7 @@ const Donation = ({ handleOpen }) => {
       description: "Donation for a cause",
       image: "https://example.com/logo.png",
       order_id: orderData.order_id,
-      handler: function (response) {
+      handler: async function (response) {
         setResponseId(response.razorpay_payment_id);
       },
       prefill: {
