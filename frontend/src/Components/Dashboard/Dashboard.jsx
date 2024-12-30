@@ -41,7 +41,7 @@ const Dashboard = () => {
             <div className="p-4 bg-white rounded-lg shadow mt-4 w-full">
               <h5 className="mb-4 text-xl font-bold">Contribution</h5>
               {loading ? (
-                <p className="text-center text-gray-600">Loading donations...</p>
+                <p className="text-center text-gray-600">Loading donation...</p>
               ) : (
                 <>
                 
