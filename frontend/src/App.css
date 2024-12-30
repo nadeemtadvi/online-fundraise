@@ -4,3 +4,6 @@
 .parent-box:hover .child-box {
   display: block;
 }
+body{
+  background-color: #f3f4f6;
+}
