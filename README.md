@@ -10,4 +10,3 @@ Frontend: React, Tailwind CSS
 Backend: Node.js, Express, MongoDB
 Payment Gateway: Razorpay
 
-# online-fundraise
